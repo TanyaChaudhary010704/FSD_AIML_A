@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./Components/Home"
 import Counter from "./Components/Counter"
+import Stopwatch from "./Components/Stopwatch"
 const App = () => {
   return (
     <div>

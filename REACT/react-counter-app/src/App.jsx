@@ -3,6 +3,7 @@ import Home from "./Components/Home"
 import Counter from "./Components/Counter"
 import Stopwatch from "./Components/Stopwatch"
 import RefEx from "./Components/RefEx"
+import Parent from "./Components/Parent"
 const App = () => {
   return (
     <div>
@@ -11,6 +12,7 @@ const App = () => {
         <Route path="/counter" element={<Counter/>}></Route>
         <Route path="/stopwatch" element={<Stopwatch/>}></Route>
         <Route path="/refex" element={<RefEx/>}></Route>
+        <Route path="/parent" element={<Parent/>}></Route>
         <Route path="*" element={<h1>No Page available</h1>}></Route>
       </Routes>
 

@@ -1,10 +1,10 @@
 import React,{useReducer} from 'react'
 //for complex state management
 const Reducerex = () => {
-  const initialValue = 0;
-  const [state, dispatch] = useReducer(reducer, initialValue)
+  const initialValue = {count:0};
+  const [state, dispatch] = useReducer(reducer, initialValue.count)
   function reducer(state,action) {
-    switch (action) {
+    switch (action.type) {
       case "add":
         return state + 1;
       case "sub":
@@ -18,9 +18,9 @@ const Reducerex = () => {
   return (
     <div>
       <h1>Counter:{state}</h1>
-      <button onClick={()=>dispatch("add")}>Increment</button>
-      <button onClick={()=>dispatch("sub")}>Decrement</button>
-      <button onClick={()=>dispatch("reset")}>Reset</button>
+      <button onClick={()=>dispatch({type:"add"})}>Increment</button>
+      <button onClick={()=>dispatch({type:"sub"})}>Decrement</button>
+      <button onClick={()=>dispatch({type:"reset"})}>Reset</button>
     </div>
   )
 }

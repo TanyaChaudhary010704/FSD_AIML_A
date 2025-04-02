@@ -45,6 +45,33 @@ const server = http.createServer((req, res) => {
     });
     res.end(JSON.stringify({ message: "Successfully registered" }));
   }
+  if (req.url == "/login" && req.method == "POST") {
+    let body = '';
+    let arr = [];
+    req.on('data', chunk => {
+      body += chunk;
+    })
+    req.on('end', async() => {
+      try {
+        console.log(body)
+        const { email, password } = JSON.parse(body);
+        const data = await fs.readFile("student.json", { encoding: "utf-8" });
+        arr = JSON.parse(data);
+        const status = arr.find((ele) => ele.email == email && ele.password==password);
+        if (status) {
+          return res.end(
+            JSON.stringify({ message: "Success" })
+          );
+        } else {
+          res.end(JSON.stringify({ "message": "Invalid User" }));
+        }
+      } catch (e) {
+        res.end(JSON.stringify({ "message": e.message }));
+      }
+      console.log(body);
+    })
+  }
+  
 });
 server.listen(port, () => {
   console.log("Server listening on port " + port);

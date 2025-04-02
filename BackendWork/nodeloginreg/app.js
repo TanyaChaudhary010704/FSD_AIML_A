@@ -3,6 +3,16 @@ const http = require("http");
 const port = 3001;
 const server = http.createServer((req, res) => {
   //res.end("Welcome to Node server!");
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-method', 'GET,POST,DELETE,PUT,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method == "OPTIONS") {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    return res.end();
+  }
+
   if (req.url == "/register" && req.method == "POST") {
     let body = "";
     let arr = [];
@@ -24,7 +34,7 @@ const server = http.createServer((req, res) => {
           );
         } else {
           arr.push({ name, email, password });
-          await fs.writeFile("student.json", JSON.stringify(arr));
+          await fs.writeFile("student.json", JSON.stringify(arr, null, 2));
           res.end(
             JSON.stringify({ message: "Registration successfully completed" })
           );
